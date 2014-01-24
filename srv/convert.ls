@@ -14,6 +14,7 @@ c = csv!.from.stream fs.createReadStream "#__dirname/../data/bydleni.csv"
         byt_index = byty.indexOf byt
         datum = datum.substr 0 10
         cena = Math.round parseInt cena, 10
+        return unless cena
         fdbi70 = parseInt fdbi70, 10
         fdbi85 = parseInt fdbi85, 10
         fdbi100 = parseInt fdbi100, 10
