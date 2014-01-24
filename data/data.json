@@ -1,1 +1,26 @@
-{"kraje":["Praha","Jihočeský","Pardubický","Královéhradecký","Vysočina","Karlovarský","Liberecký","Plzeňský","Středočeský","Ústecký","Jihomoravský","Olomoucký","Moravskoslezský","Zlínský","Celá ČR"],"byty":["1+1","2+1","3+1","4+1","všechny byty"]}
+{
+  "kraje": [
+    "Praha",
+    "Jihočeský",
+    "Pardubický",
+    "Královéhradecký",
+    "Vysočina",
+    "Karlovarský",
+    "Liberecký",
+    "Plzeňský",
+    "Středočeský",
+    "Ústecký",
+    "Jihomoravský",
+    "Olomoucký",
+    "Moravskoslezský",
+    "Zlínský",
+    "Celá ČR"
+  ],
+  "byty": [
+    "1+1",
+    "2+1",
+    "3+1",
+    "4+1",
+    "všechny byty"
+  ]
+}

@@ -1,0 +1,23 @@
+(err, data) <~ d3.csv "../data/byty_normalized.csv", (line) ->
+    line.byt = indices.byty[line.byt_index]
+    line.kraj = indices.kraje[line.kraj_index]
+    <[cena byt_index kraj_index]>.forEach ->
+        line[it] = parseInt line[it], 10
+    <[fdbi70 fdbi85 fdbi100 pdb]>.forEach ->
+        line[it] = parseFloat line[it]
+    line.date = new Date line.datum
+    line
+
+grouped = {}
+for datum in data
+    id = [datum.byt_index, datum.kraj_index].join '-'
+    grouped[id] ?= []
+        ..push datum
+
+graph = new LineGraph do
+    \.bydleni
+    grouped
+    {width: 800 height: 600}
+graph.draw do
+    <[0-1 0-2]>
+    <[cena]>

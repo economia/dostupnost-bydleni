@@ -1,12 +1,12 @@
 window.XScale =
-    recomputeXScale: ->
+    recomputeXScale: (domain) ->
         @x ?= d3.scale.linear!
-            ..domain [0 @data.0.data.length + 2]
+            ..domain domain
             ..range [0 @width]
 
 
 window.YScale =
-    recomputeYScale: ->
+    recomputeYScale: (domain) ->
         @y ?= d3.scale.linear!
-            ..domain [0 30]
+            ..domain domain
             ..range [@height, 0]

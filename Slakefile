@@ -3,11 +3,13 @@ require! fs
 option 'testFile' 'File in (/lib or /test) to run test on' 'FILE'
 option 'currentfile' 'Latest file that triggered the save' 'FILE'
 
-externalScripts = []
+externalScripts =
+    \http://service.ihned.cz/js/modernizr/v2.6.2.svg.min.js
+    \http://service.ihned.cz/js/d3/v3.3.2.min.js
 
 externalStyles = []
 
-deferScripts = <[ base.js ]>
+deferScripts = <[ base.js LineGraph.js ]>
 gzippable = <[ ]>
 build-styles = (options = {}) ->
     require! async
