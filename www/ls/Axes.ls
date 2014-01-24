@@ -7,13 +7,29 @@ window.YAxis =
             ..tickFormat ->
                 | isPercent => "#{Math.round it * 100}%"
                 | otherwise => utils.formatPrice it
-            ..tickSize 5
+            ..tickSize 3
             ..outerTickSize 0
-            ..orient \right
+            ..orient \left
         @yAxisGroup = @drawing.append \g
             ..attr \class "axis y"
             ..call yAxis
             ..selectAll "text"
                 ..attr \x -7
                 ..attr \dy 5
-                ..style \text-anchor \end
+
+window.XAxis =
+    drawXAxis: ->
+        xAxis = d3.svg.axis!
+            ..scale @x
+            ..ticks d3.time.year
+            ..tickSize 4
+            ..outerTickSize 0
+            ..orient \bottom
+        @xAxisGroup = @drawing.append \g
+            ..attr \class "axis x"
+            ..attr \transform "translate(0, #{@height})"
+            ..call xAxis
+            ..selectAll "text"
+                # ..attr \x -7
+                ..attr \dy 13
+

@@ -1,4 +1,4 @@
-window.LineGraph = class LineGraph implements Dimensionable, XScale, YScale, YAxis, LineDefinition
+window.LineGraph = class LineGraph implements Dimensionable, XScale, YScale, XAxis, YAxis, LineDefinition
     (parentSelector, @fulldata, {width, height}:options) ->
         @svg = d3.select parentSelector .append \svg
         @drawing = @svg.append \g
@@ -31,6 +31,7 @@ window.LineGraph = class LineGraph implements Dimensionable, XScale, YScale, YAx
         @recomputeXScale [absMin.x, absMax.x]
         @recomputeYScale [0, absMax.y]
         @drawYAxis!
+        @drawXAxis!
         @drawing.selectAll \g.line.active .data lines
             ..enter!
                 ..append \g
@@ -52,9 +53,9 @@ window.LineGraph = class LineGraph implements Dimensionable, XScale, YScale, YAx
 
     computeAbsoluteLimits: (lines) ->
         absMax =
-            x: Math.max ...lines.map (.max.x)
+            x: new Date Math.max ...lines.map (.max.x)
             y: Math.max ...lines.map (.max.y)
         absMin =
-            x: Math.min ...lines.map (.min.x)
+            x: new Date Math.min ...lines.map (.min.x)
             y: Math.min ...lines.map (.min.y)
         {absMax, absMin}

@@ -1,6 +1,6 @@
 window.XScale =
     recomputeXScale: (domain) ->
-        @x ?= d3.scale.linear!
+        @x ?= d3.time.scale!
             ..domain domain
             ..range [0 @width]
 
