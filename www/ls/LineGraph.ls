@@ -1,15 +1,14 @@
 window.LineGraph = class LineGraph implements Dimensionable, XScale, YScale, YAxis, LineDefinition
     (parentSelector, @fulldata, {width, height}:options) ->
-        @computeDimensions width, height
         @svg = d3.select parentSelector .append \svg
-            ..attr \width @fullWidth
-            ..attr \height @fullHeight
         @drawing = @svg.append \g
             ..attr \class \drawing
-            ..attr \transform "translate(#{@margin.left}, #{@margin.top})"
+        @computeDimensions width, height
+        @svg
+            ..attr \width @fullWidth
+            ..attr \height @fullHeight
 
         @line = @getLineDefinition!
-        # @drawYAxis!
 
 
     draw: (ids, fields) ->
@@ -28,16 +27,18 @@ window.LineGraph = class LineGraph implements Dimensionable, XScale, YScale, YAx
                     y: Math.min ...values.map (.y)
                 lines.push {values, min, max, field}
         {absMax, absMin} = @computeAbsoluteLimits lines
+        @recomputeDimensions!
         @recomputeXScale [absMin.x, absMax.x]
-        @recomputeYScale [absMin.y, absMax.y]
+        @recomputeYScale [0, absMax.y]
+        @drawYAxis!
         @drawing.selectAll \g.line.active .data lines
             ..enter!
                 ..append \g
                     ..attr \class "line active"
                     ..attr \transform "translate(0, #{@height})"
                     ..transition!
-                        ..duration 600
-                        ..delay 400
+                        ..duration 100
+                        # ..delay 400
                         ..attr \transform "translate(0, 0)"
                     ..append \path
                         ..attr \d ~> @line it.values
