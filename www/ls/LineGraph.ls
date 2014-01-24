@@ -3,6 +3,8 @@ window.LineGraph = class LineGraph implements Dimensionable, XScale, YScale, XAx
         @svg = d3.select parentSelector .append \svg
         @drawing = @svg.append \g
             ..attr \class \drawing
+        @regionsGroup = @drawing.append \g
+            ..attr \class \regions
         @computeDimensions width, height
         @svg
             ..attr \width @fullWidth
@@ -13,7 +15,14 @@ window.LineGraph = class LineGraph implements Dimensionable, XScale, YScale, XAx
 
     draw: (ids, fields) ->
         lines = []
+        regions_assoc = {}
+        regions = []
         for id in ids
+            [region_id] = id.split "-"
+            if not regions_assoc[region_id]
+                regions_assoc[region_id] = []
+                regions.push regions_assoc[region_id]
+            region = regions_assoc[region_id]
             for field in fields
                 values = @fulldata[id].map ->
                     y = it[field]
@@ -25,14 +34,22 @@ window.LineGraph = class LineGraph implements Dimensionable, XScale, YScale, XAx
                 min =
                     x: Math.min ...values.map (.x)
                     y: Math.min ...values.map (.y)
-                lines.push {values, min, max, field}
+                line = {values, min, max, field}
+                region.push line
+                lines.push line
         {absMax, absMin} = @computeAbsoluteLimits lines
         @recomputeDimensions!
         @recomputeXScale [absMin.x, absMax.x]
         @recomputeYScale [0, absMax.y]
         @drawYAxis!
         @drawXAxis!
-        @drawing.selectAll \g.line.active .data lines
+        @regionsGroup.selectAll \g.region
+            .data regions
+            .enter!append \g
+                ..attr \class \region
+
+        region = @regionsGroup.selectAll \g.region
+        region.selectAll \g.line.active .data ((regionLines) -> regionLines)
             ..enter!
                 ..append \g
                     ..attr \class "line active"

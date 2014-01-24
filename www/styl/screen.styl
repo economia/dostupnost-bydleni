@@ -9,10 +9,24 @@
     width 100%
     overflow hidden
 svg
-    path.line
-        fill none
-        stroke red
-        stroke-width 1px
+    g.line
+        path
+            stroke HNBlue
+        &:first-child path
+            stroke #e41a1c
+        &:nth-child(2) path
+            stroke #377eb8
+        &:nth-child(3) path
+            stroke #4daf4a
+        path.line
+            fill none
+            stroke-width 1px
+            stroke-dasharray 5 2
+
+    g.regions
+        g.region:first-child
+            path
+                stroke-dasharray none
     g.axis
         text
             fill #555

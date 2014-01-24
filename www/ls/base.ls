@@ -10,7 +10,7 @@
 
 grouped = {}
 for datum in data
-    id = [datum.byt_index, datum.kraj_index].join '-'
+    id = [datum.kraj_index, datum.byt_index].join '-'
     grouped[id] ?= []
         ..push datum
 
@@ -19,5 +19,5 @@ graph = new LineGraph do
     grouped
     {width: window.innerWidth, height: window.innerHeight}
 graph.draw do
-    <[0-1 0-2]>
+    <[0-0 0-1 0-2 2-0 2-1 2-2]>
     <[cena]>
