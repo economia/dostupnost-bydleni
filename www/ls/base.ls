@@ -1,3 +1,5 @@
+(err, kraje) <~ d3.json "../data/kraje.topo.json"
+{features} = topojson.feature kraje, kraje.objects.kraje
 (err, data) <~ d3.csv "../data/byty_normalized.csv", (line) ->
     line.byt = indices.byty[line.byt_index]
     line.kraj = indices.kraje[line.kraj_index]
