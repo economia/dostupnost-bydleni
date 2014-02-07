@@ -13,7 +13,6 @@ window.LineGraph = class LineGraph implements Dimensionable, XScale, YScale, XAx
                 {x, y} = d3.event
                 @drawValue x - @margin.left, y
 
-
         @line = @getLineDefinition!
         @initValueDrawer!
 

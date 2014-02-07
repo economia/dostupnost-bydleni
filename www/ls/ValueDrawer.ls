@@ -58,8 +58,8 @@ window.ValueDrawer =
                 ..select \rect
                     ..attr \x (d, i) -> bboxes[i].width * -1 - 11
 
-
-
+    hideValueDrawer: ->
+        @valueDrawerGroup.classed \hidden yes
 
     initValueDrawer: ->
         @valueDrawerGroup = @drawing.append \g
