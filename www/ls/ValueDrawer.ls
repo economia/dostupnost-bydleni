@@ -2,8 +2,10 @@ window.ValueDrawer =
     drawValue: (xPx, yPx) ->
         @valueDrawerGroup .classed \hidden xPx < 0
         xValue = @x.invert xPx
+        yValue = @y.invert yPx
         lastD = -Infinity
         lastPoint = null
+        yReferencePoint = null
         highlightpoints = for dataline in @datalines
             for point in dataline.values
                 d = point.x - xValue
@@ -13,15 +15,20 @@ window.ValueDrawer =
                     break
                 lastD = d
                 lastPoint = point
+            lastPoint.yDistance = Math.abs yValue - lastPoint.y
+            if not yReferencePoint or yReferencePoint.yDistance > lastPoint.yDistance
+                yReferencePoint = lastPoint
             lastPoint
+
         highlightpoints.push do
             y: 0
             type: \xAxis
             x: lastPoint.x
 
         x = @x lastPoint.x
-        return if x is @lastDrawnX
+        return if x is @lastDrawnX and @lastDrawnY == yReferencePoint
         @lastDrawnX = x
+        @lastDrawnY = yReferencePoint
         @valueDrawerGroup
             ..classed \hidden xPx < 0
             ..attr \transform "translate(#x, 0)"
@@ -45,7 +52,9 @@ window.ValueDrawer =
                     | it.type == \xAxis
                         "#{ig.utils.czechMonth it.x} #{it.x.getFullYear!}"
                     | otherwise
-                        "#{ig.utils.formatPrice it.y} Kč"
+                        "#{ig.utils.formatPrice it.y} Kč (
+                        #{Math.round it.y / yReferencePoint.y * 100}%)"
+                ..classed \reference -> it is yReferencePoint
                 ..each (d, i) -> bboxes[i] = @getBBox!
             ..select \rect
                 ..attr \x 1
