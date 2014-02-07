@@ -1,6 +1,7 @@
 window.ValueDrawer =
-    drawValue: (x, y) ->
-        xValue = @x.invert x
+    drawValue: (xPx, yPx) ->
+        @valueDrawerGroup .classed \hidden xPx < 0
+        xValue = @x.invert xPx
         lastD = -Infinity
         lastPoint = null
         highlightpoints = for dataline in @datalines
@@ -17,6 +18,7 @@ window.ValueDrawer =
         return if x is @lastDrawnX
         @lastDrawnX = x
         @valueDrawerGroup
+            ..classed \hidden xPx < 0
             ..attr \transform "translate(#x, 0)"
         @valueDrawerGroup.selectAll \g.text
             .data highlightpoints
