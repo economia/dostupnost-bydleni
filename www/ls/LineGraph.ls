@@ -1,4 +1,4 @@
-window.LineGraph = class LineGraph implements Dimensionable, XScale, YScale, XAxis, YAxis, LineDefinition
+window.LineGraph = class LineGraph implements Dimensionable, XScale, YScale, XAxis, YAxis, LineDefinition, ValueDrawer
     (parentSelector, @fulldata, {width, height}:options) ->
         @svg = d3.select parentSelector .append \svg
         @drawing = @svg.append \g
@@ -9,8 +9,13 @@ window.LineGraph = class LineGraph implements Dimensionable, XScale, YScale, XAx
         @svg
             ..attr \width @fullWidth
             ..attr \height @fullHeight
+            ..on \mousemove ~>
+                {x, y} = d3.event
+                @drawValue x - @margin.left, y
+
 
         @line = @getLineDefinition!
+        @initValueDrawer!
 
 
     draw: (ids, fields) ->
@@ -38,6 +43,7 @@ window.LineGraph = class LineGraph implements Dimensionable, XScale, YScale, XAx
                 region.push line
                 lines.push line
         {absMax, absMin} = @computeAbsoluteLimits lines
+        @datalines = regions.reduce (prev, curr) -> (prev || []) ++ curr
         @recomputeDimensions!
         @recomputeXScale [absMin.x, absMax.x]
         @recomputeYScale [0, absMax.y]
