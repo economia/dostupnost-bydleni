@@ -14,6 +14,11 @@ window.ValueDrawer =
                 lastD = d
                 lastPoint = point
             lastPoint
+        highlightpoints.push do
+            y: 0
+            type: \xAxis
+            x: lastPoint.x
+
         x = @x lastPoint.x
         return if x is @lastDrawnX
         @lastDrawnX = x
@@ -25,18 +30,22 @@ window.ValueDrawer =
             .enter!append \g
                 ..attr \class \text
                 ..append \rect
-                    ..attr \y -4
+                    ..attr \y -22
                     ..attr \height 27
                 ..append \text
                     ..attr \class \y
-                    ..attr \dy 14
+                    ..attr \dy -5
         bboxes = []
         textGroups = @valueDrawerGroup.selectAll \g.text
             ..attr \transform ~> "translate(0,#{@y it.y})"
             ..select \text.y
                 ..attr \text-anchor \start
                 ..attr \dx 5
-                ..text -> "#{window.utils.formatPrice it.y} Kč"
+                ..text ->
+                    | it.type == \xAxis
+                        "#{ig.utils.czechMonth it.x} #{it.x.getFullYear!}"
+                    | otherwise
+                        "#{ig.utils.formatPrice it.y} Kč"
                 ..each (d, i) -> bboxes[i] = @getBBox!
             ..select \rect
                 ..attr \x 1

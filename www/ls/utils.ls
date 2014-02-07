@@ -1,4 +1,18 @@
-window.utils =
+months =
+    \Leden
+    \Únor
+    \Březen
+    \Duben
+    \Květen
+    \Červen
+    \Červenec
+    \Srpen
+    \Září
+    \Říjen
+    \Listopad
+    \Prosinec
+window.ig = {}
+ig.utils = window.utils =
     formatPrice : (price) ->
         price .= toString!
         out = []
@@ -8,3 +22,6 @@ window.utils =
             if 2 == i % 3 and i isnt len - 1
                 out.unshift ' '
         out.join ''
+    czechMonth: (date) ->
+        months[date.getMonth!]
+
