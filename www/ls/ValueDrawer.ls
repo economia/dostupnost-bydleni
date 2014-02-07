@@ -25,21 +25,30 @@ window.ValueDrawer =
             .enter!append \g
                 ..attr \class \text
                 ..append \rect
-                    ..attr \x 1
                     ..attr \y -4
                     ..attr \height 27
                 ..append \text
                     ..attr \class \y
                     ..attr \dy 14
-                    ..attr \dx 5
         bboxes = []
-        @valueDrawerGroup.selectAll \g.text
+        textGroups = @valueDrawerGroup.selectAll \g.text
             ..attr \transform ~> "translate(0,#{@y it.y})"
             ..select \text.y
+                ..attr \text-anchor \start
+                ..attr \dx 5
                 ..text -> "#{window.utils.formatPrice it.y} Kč"
                 ..each (d, i) -> bboxes[i] = @getBBox!
             ..select \rect
+                ..attr \x 1
                 ..attr \width (d, i) -> bboxes[i].width + 10
+        if @width - xPx < Math.max ...bboxes.map (.width)
+            textGroups
+                ..select \text.y
+                    ..attr \text-anchor \end
+                    ..attr \dx -5
+                ..select \rect
+                    ..attr \x (d, i) -> bboxes[i].width * -1 - 11
+
 
 
 
