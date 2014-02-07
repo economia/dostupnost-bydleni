@@ -12,21 +12,52 @@ svg
     g.line
         path
             stroke HNBlue
-        &:first-child path
-            stroke #e41a1c
-        &:nth-child(2) path
-            stroke #377eb8
-        &:nth-child(3) path
-            stroke #4daf4a
+
         path.line
             fill none
             stroke-width 1px
-            stroke-dasharray 5 2
 
     g.regions
-        g.region:first-child
-            path
-                stroke-dasharray none
+        g.region:nth-child(1)
+            g.line
+                &:nth-child(1) path
+                    stroke #08519c
+                &:nth-child(2) path
+                    stroke #3182bd
+                &:nth-child(3) path
+                    stroke #6baed6
+        g.region:nth-child(2)
+            g.line
+                &:nth-child(1) path
+                    stroke #006d2c
+                &:nth-child(2) path
+                    stroke #31a354
+                &:nth-child(3) path
+                    stroke #74c476
+        g.region:nth-child(3)
+            g.line
+                &:nth-child(1) path
+                    stroke #a63603
+                &:nth-child(2) path
+                    stroke #e6550d
+                &:nth-child(3) path
+                    stroke #fd8d3c
+        g.region:nth-child(4)
+            g.line
+                &:nth-child(1) path
+                    stroke #54278f
+                &:nth-child(2) path
+                    stroke #756bb1
+                &:nth-child(3) path
+                    stroke #9e9ac8
+        g.region:nth-child(5)
+            g.line
+                &:nth-child(1) path
+                    stroke #a50f15
+                &:nth-child(2) path
+                    stroke #de2d26
+                &:nth-child(3) path
+                    stroke #fb6a4a
     g.axis
         text
             fill #555
