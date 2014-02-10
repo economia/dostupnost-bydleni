@@ -42,6 +42,14 @@ czMaps.forEach (map, mapId) ->
             refreshMapActiveness!
             redrawGraph!
 
+topicSelector = new TopicSelector \.bydleni
+    ..items.on \click ({byty, fields})->
+        currentByty := byty
+        currentFields := fields
+        topicSelector.items.classed \active no
+        @className = \active
+        redrawGraph!
+
 refreshMapActiveness = ->
     czMaps.forEach (map, index) ->
         map.paths.classed \active (d, i) -> topoToIndices[i] == currentKraje[index]
