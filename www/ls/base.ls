@@ -19,7 +19,7 @@ for datum in data
 graph = new LineGraph do
     \.bydleni
     grouped
-    {width: window.innerWidth - 240, height: window.innerHeight}
+    {width: window.innerWidth - 240, height: window.innerHeight - 20}
 
 czMaps = []
 currentKraje = [0 9]
