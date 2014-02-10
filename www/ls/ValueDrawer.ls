@@ -46,8 +46,13 @@ window.ValueDrawer =
         bboxes = []
         correctForOccupied = (desiredY) ->
             y = Math.round desiredY
-            while occupiedYPixels[y] => ++y
-            while occupiedYPixels[y + 20] => --y
+            roundY = null
+            roundCount = 0
+            while roundY != y and roundCount < 5
+                ++roundCount
+                roundY = y
+                while occupiedYPixels[y] => ++y
+                while occupiedYPixels[y + 20] => --y
             for offset in [0 til 20] => occupiedYPixels[y + offset] = yes
             y
 
