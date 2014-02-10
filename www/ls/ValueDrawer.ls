@@ -76,7 +76,7 @@ window.ValueDrawer =
                                 #{Math.round it.y / yReferencePoint.y * 100}%)
                                 ; #{indices.byty[it.byt_id]} #{indices.kraje[it.region_id]}, #{spolu}% spoluúčast"
                             | \pdb
-                                "#{it.y.toString!replace '.' ','} platů (
+                                "#{it.y.toString!replace '.' ','} ročních platů (
                                 #{Math.round it.y / yReferencePoint.y * 100}%)
                                 ; #{indices.byty[it.byt_id]} #{indices.kraje[it.region_id]}"
 
