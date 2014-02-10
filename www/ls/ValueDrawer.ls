@@ -32,9 +32,8 @@ window.ValueDrawer =
         @valueDrawerGroup
             ..classed \hidden xPx < 0
             ..attr \transform "translate(#x, 0)"
-        @valueDrawerGroup.selectAll \g.text
-            .data highlightpoints
-            .enter!append \g
+        @valueDrawerGroup.selectAll \g.text .data highlightpoints
+            ..enter!append \g
                 ..attr \class \text
                 ..append \rect
                     ..attr \y -22
@@ -42,6 +41,7 @@ window.ValueDrawer =
                 ..append \text
                     ..attr \class \y
                     ..attr \dy -5
+            ..exit!remove!
         occupiedYPixels = []
         bboxes = []
         correctForOccupied = (desiredY) ->
