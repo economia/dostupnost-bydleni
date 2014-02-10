@@ -23,6 +23,11 @@ graph = new LineGraph do
 graph.draw do
     <[0-2 0-1 0-0 2-2 2-1 2-0]>
     <[cena]>
-
-czMap = new CZMap width: 200, height: 200, parentSelector: \.bydleni
+czMaps = []
+czMaps.push = new CZMap width: 220, parentSelector: \.bydleni
     ..draw features
+    ..svg.classed \first yes
+
+czMaps.push = new CZMap width: 220, parentSelector: \.bydleni
+    ..draw features
+    ..svg.classed \second yes

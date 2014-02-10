@@ -1,6 +1,7 @@
 window.LineGraph = class LineGraph implements Dimensionable, XScale, YScale, XAxis, YAxis, LineDefinition, ValueDrawer
     (parentSelector, @fulldata, {width, height}:options) ->
         @svg = d3.select parentSelector .append \svg
+            ..attr \class \LineGraph
         @drawing = @svg.append \g
             ..attr \class \drawing
         @regionsGroup = @drawing.append \g

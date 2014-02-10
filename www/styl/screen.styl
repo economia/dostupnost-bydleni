@@ -8,7 +8,7 @@
     bottom 0px
     width 100%
     overflow hidden
-svg
+svg.LineGraph
     g.line
         path
             stroke HNBlue
@@ -86,3 +86,24 @@ svg
         rect
             fill white
             fill-opacity 0.7
+svg.CZMap
+    position absolute
+    right 0px
+    &.first
+        top 10px
+        path
+            fill #6baed6
+            &:hover
+                fill #3182bd
+                cursor pointer
+            &.active
+                fill #08519c
+    &.second
+        top 180px
+        path
+            fill #74c476
+            &:hover
+                fill #31a354
+                cursor pointer
+            &.active
+                fill #006d2c
