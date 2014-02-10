@@ -22,7 +22,7 @@ graph = new LineGraph do
     {width: window.innerWidth - 240, height: window.innerHeight}
 
 czMaps = []
-currentKraje = [0 2]
+currentKraje = [0 9]
 currentByty = [2 1 0]
 currentFields = ["cena"]
 topoToIndices = [0 1 10 5 4 3 6 12 11 2 7 8 9 13]
