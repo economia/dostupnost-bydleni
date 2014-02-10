@@ -36,13 +36,16 @@ czMaps.forEach (map, mapId) ->
         ..draw features
         ..paths.on \mousedown -> d3.event.preventDefault!
         ..paths.on \click (d, i) ->
-            currentKraje[mapId] = topoToIndices[i]
+            currentKraje[mapId] =
+                | currentKraje[mapId] == topoToIndices[i] => null
+                | otherwise                               => topoToIndices[i]
             refreshMapActiveness!
             redrawGraph!
 
 refreshMapActiveness = ->
     czMaps.forEach (map, index) ->
         map.paths.classed \active (d, i) -> topoToIndices[i] == currentKraje[index]
+
 redrawGraph = ->
     datalines = []
     currentKraje.forEach (kraj) ->

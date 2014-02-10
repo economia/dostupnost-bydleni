@@ -29,6 +29,7 @@ window.LineGraph = class LineGraph implements Dimensionable, XScale, YScale, XAx
                 regions_assoc[region_id] = []
                 regions.push regions_assoc[region_id]
             region = regions_assoc[region_id]
+            continue if region_id is \null
             for field in fields
                 values = @fulldata[id].map ->
                     y = it[field]
@@ -50,10 +51,10 @@ window.LineGraph = class LineGraph implements Dimensionable, XScale, YScale, XAx
         @recomputeYScale [0, absMax.y]
         @drawYAxis!
         @drawXAxis!
-        @regionsGroup.selectAll \g.region
-            .data regions
-            .enter!append \g
-                ..attr \class \region
+        @regionsGroup.selectAll \g.region.active .data regions
+            ..enter!append \g
+                ..attr \class "region active"
+            ..exit!remove!
 
         region = @regionsGroup.selectAll \g.region
         region.selectAll \g.line.active .data ((regionLines) -> regionLines)
@@ -62,8 +63,7 @@ window.LineGraph = class LineGraph implements Dimensionable, XScale, YScale, XAx
                     ..attr \class "line active"
                     ..attr \transform "translate(0, #{@height})"
                     ..transition!
-                        ..duration 100
-                        # ..delay 400
+                        ..duration if @firstDrawn then 800 else 0
                         ..attr \transform "translate(0, 0)"
                     ..append \path
                         ..attr \class \line
