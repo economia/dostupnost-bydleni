@@ -42,9 +42,17 @@ window.ValueDrawer =
                 ..append \text
                     ..attr \class \y
                     ..attr \dy -5
+        occupiedYPixels = []
         bboxes = []
+        correctForOccupied = (desiredY) ->
+            y = Math.round desiredY
+            while occupiedYPixels[y] => ++y
+            while occupiedYPixels[y + 20] => --y
+            for offset in [0 til 20] => occupiedYPixels[y + offset] = yes
+            y
+
         textGroups = @valueDrawerGroup.selectAll \g.text
-            ..attr \transform ~> "translate(0,#{@y it.y})"
+            ..attr \transform ~> "translate(0,#{correctForOccupied @y it.y})"
             ..select \text.y
                 ..attr \text-anchor \start
                 ..attr \dx 5
