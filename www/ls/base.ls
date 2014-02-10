@@ -27,14 +27,18 @@ currentByty = [2 1 0]
 currentFields = ["cena"]
 topoToIndices = [0 1 10 5 4 3 6 12 11 2 7 8 9 13]
 czMaps[0] = new CZMap width: 220, parentSelector: \.bydleni
-    ..draw features
     ..svg.classed \first yes
-    ..paths.on \click (d, i) ->
-        console.log i, indices.kraje[topoToIndices[i]]
 
 czMaps[1] = new CZMap width: 220, parentSelector: \.bydleni
-    ..draw features
     ..svg.classed \second yes
+czMaps.forEach (map, mapId) ->
+    map
+        ..draw features
+        ..paths.on \mousedown -> d3.event.preventDefault!
+        ..paths.on \click (d, i) ->
+            currentKraje[mapId] = topoToIndices[i]
+            refreshMapActiveness!
+            redrawGraph!
 
 refreshMapActiveness = ->
     czMaps.forEach (map, index) ->

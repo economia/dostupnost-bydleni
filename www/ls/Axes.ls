@@ -10,15 +10,19 @@ window.YAxis =
             ..tickSize 3
             ..outerTickSize 0
             ..orient \left
-        @yAxisGroup = @drawing.append \g
+        @yAxisGroup = @drawing.append \g unless @yAxisGroup
+        @yAxisGroup
             ..attr \class "axis y"
-            ..call yAxis
-            ..selectAll "text"
-                ..attr \x -7
-                ..attr \dy 5
+            ..transition!
+                ..duration if @firstDrawn then 800 else 0
+                ..call yAxis
+                ..selectAll "text"
+                    ..attr \x -7
+                    ..attr \dy 5
 
 window.XAxis =
     drawXAxis: ->
+        return if @xAxisGroup
         xAxis = d3.svg.axis!
             ..scale @x
             ..ticks d3.time.year

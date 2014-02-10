@@ -66,7 +66,6 @@ window.LineGraph = class LineGraph implements Dimensionable, XScale, YScale, XAx
                         # ..delay 400
                         ..attr \transform "translate(0, 0)"
                     ..append \path
-                        ..attr \d ~> @line it.values
                         ..attr \class \line
             ..exit!
                 ..classed \active no
@@ -74,6 +73,12 @@ window.LineGraph = class LineGraph implements Dimensionable, XScale, YScale, XAx
                     ..duration 600
                     ..attr \transform "translate(0, #{@height})"
                     ..remove!
+        region.selectAll \g.line.active
+            ..select \path.line
+                ..transition!
+                    ..duration if @firstDrawn then 800 else 0
+                    ..attr \d ~> @line it.values
+        @firstDrawn = yes
 
     computeAbsoluteLimits: (lines) ->
         absMax =
