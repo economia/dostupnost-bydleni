@@ -24,7 +24,7 @@ window.LineGraph = class LineGraph implements Dimensionable, XScale, YScale, XAx
         regions_assoc = {}
         regions = []
         for id in ids
-            [region_id] = id.split "-"
+            [region_id, byt_id] = id.split "-"
             if not regions_assoc[region_id]
                 regions_assoc[region_id] = []
                 regions.push regions_assoc[region_id]
@@ -34,7 +34,7 @@ window.LineGraph = class LineGraph implements Dimensionable, XScale, YScale, XAx
                 values = @fulldata[id].map ->
                     y = it[field]
                     x = it.date
-                    {x, y}
+                    {x, y, region_id, byt_id}
                 max =
                     x: Math.max ...values.map (.x)
                     y: Math.max ...values.map (.y)

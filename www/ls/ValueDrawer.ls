@@ -61,7 +61,9 @@ window.ValueDrawer =
                         "#{ig.utils.czechMonth it.x} #{it.x.getFullYear!}"
                     | otherwise
                         "#{ig.utils.formatPrice it.y} Kč (
-                        #{Math.round it.y / yReferencePoint.y * 100}%)"
+                        #{Math.round it.y / yReferencePoint.y * 100}%)
+                        ; #{indices.byty[it.byt_id]} #{indices.kraje[it.region_id]}
+                        "
                 ..classed \reference -> it is yReferencePoint
                 ..each (d, i) -> bboxes[i] = @getBBox!
             ..select \rect
