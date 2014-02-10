@@ -20,11 +20,11 @@ graph = new LineGraph do
     \.bydleni
     grouped
     {width: window.innerWidth - 240, height: window.innerHeight}
-graph.draw do
-    <[0-2 0-1 0-0 2-2 2-1 2-0]>
-    <[cena]>
+
 czMaps = []
 currentKraje = [0 2]
+currentByty = [2 1 0]
+currentFields = ["cena"]
 topoToIndices = [0 1 10 5 4 3 6 12 11 2 7 8 9 13]
 czMaps[0] = new CZMap width: 220, parentSelector: \.bydleni
     ..draw features
@@ -39,5 +39,14 @@ czMaps[1] = new CZMap width: 220, parentSelector: \.bydleni
 refreshMapActiveness = ->
     czMaps.forEach (map, index) ->
         map.paths.classed \active (d, i) -> topoToIndices[i] == currentKraje[index]
+redrawGraph = ->
+    datalines = []
+    currentKraje.forEach (kraj) ->
+        currentByty.forEach (byt) ->
+            datalines.push "#kraj-#byt"
+    graph.draw do
+        datalines
+        currentFields
 
 refreshMapActiveness!
+redrawGraph!
