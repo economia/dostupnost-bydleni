@@ -13,6 +13,7 @@ window.LineGraph = class LineGraph implements Dimensionable, XScale, YScale, XAx
             ..on \mousemove ~>
                 {x, y} = d3.event
                 @drawValue x - @margin.left, y
+            ..on \mouseout @~hideValueDrawer
 
         @line = @getLineDefinition!
         @initValueDrawer!

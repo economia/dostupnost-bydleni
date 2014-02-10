@@ -1,7 +1,7 @@
 window.Dimensionable =
     margin:
         top: 4
-        right: 240
+        right: 0
         bottom: 22
         left: 65
 

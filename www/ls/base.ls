@@ -19,7 +19,7 @@ for datum in data
 graph = new LineGraph do
     \.bydleni
     grouped
-    {width: window.innerWidth, height: window.innerHeight}
+    {width: window.innerWidth - 240, height: window.innerHeight}
 graph.draw do
     <[0-2 0-1 0-0 2-2 2-1 2-0]>
     <[cena]>
