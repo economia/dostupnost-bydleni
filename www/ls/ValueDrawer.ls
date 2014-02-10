@@ -65,10 +65,21 @@ window.ValueDrawer =
                     | it.type == \xAxis
                         "#{ig.utils.czechMonth it.x} #{it.x.getFullYear!}"
                     | otherwise
-                        "#{ig.utils.formatPrice it.y} Kč (
-                        #{Math.round it.y / yReferencePoint.y * 100}%)
-                        ; #{indices.byty[it.byt_id]} #{indices.kraje[it.region_id]}
-                        "
+                        switch it.field
+                            | \cena
+                                "#{ig.utils.formatPrice it.y} Kč (
+                                #{Math.round it.y / yReferencePoint.y * 100}%)
+                                ; #{indices.byty[it.byt_id]} #{indices.kraje[it.region_id]}"
+                            | \fdbi70, \fdbi85, \fdbi100
+                                spolu = it.field.substr 4
+                                "#{Math.round it.y * 100}% (
+                                #{Math.round it.y / yReferencePoint.y * 100}%)
+                                ; #{indices.byty[it.byt_id]} #{indices.kraje[it.region_id]}, #{spolu}% spoluúčast"
+                            | \pdb
+                                "#{it.y.toString!replace '.' ','} platů (
+                                #{Math.round it.y / yReferencePoint.y * 100}%)
+                                ; #{indices.byty[it.byt_id]} #{indices.kraje[it.region_id]}"
+
                 ..classed \reference -> it is yReferencePoint
                 ..each (d, i) -> bboxes[i] = @getBBox!
             ..select \rect

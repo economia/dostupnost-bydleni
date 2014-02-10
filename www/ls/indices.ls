@@ -20,4 +20,4 @@ window.indices =
         "2+1"
         "3+1"
         "4+1"
-        "všechny byty"
+        "průměrný byt, "

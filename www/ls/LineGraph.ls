@@ -34,7 +34,7 @@ window.LineGraph = class LineGraph implements Dimensionable, XScale, YScale, XAx
                 values = @fulldata[id].map ->
                     y = it[field]
                     x = it.date
-                    {x, y, region_id, byt_id}
+                    {x, y, region_id, byt_id, field}
                 max =
                     x: Math.max ...values.map (.x)
                     y: Math.max ...values.map (.y)
