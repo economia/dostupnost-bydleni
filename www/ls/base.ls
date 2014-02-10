@@ -24,10 +24,20 @@ graph.draw do
     <[0-2 0-1 0-0 2-2 2-1 2-0]>
     <[cena]>
 czMaps = []
-czMaps.push = new CZMap width: 220, parentSelector: \.bydleni
+currentKraje = [0 2]
+topoToIndices = [0 1 10 5 4 3 6 12 11 2 7 8 9 13]
+czMaps[0] = new CZMap width: 220, parentSelector: \.bydleni
     ..draw features
     ..svg.classed \first yes
+    ..paths.on \click (d, i) ->
+        console.log i, indices.kraje[topoToIndices[i]]
 
-czMaps.push = new CZMap width: 220, parentSelector: \.bydleni
+czMaps[1] = new CZMap width: 220, parentSelector: \.bydleni
     ..draw features
     ..svg.classed \second yes
+
+refreshMapActiveness = ->
+    czMaps.forEach (map, index) ->
+        map.paths.classed \active (d, i) -> topoToIndices[i] == currentKraje[index]
+
+refreshMapActiveness!
