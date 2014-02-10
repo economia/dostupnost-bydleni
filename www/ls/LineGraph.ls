@@ -35,6 +35,7 @@ window.LineGraph = class LineGraph implements Dimensionable, XScale, YScale, XAx
                     y = it[field]
                     x = it.date
                     {x, y, region_id, byt_id, field}
+                values .= filter -> it.y
                 max =
                     x: Math.max ...values.map (.x)
                     y: Math.max ...values.map (.y)
@@ -47,7 +48,7 @@ window.LineGraph = class LineGraph implements Dimensionable, XScale, YScale, XAx
         {absMax, absMin} = @computeAbsoluteLimits lines
         @datalines = regions.reduce (prev, curr) -> (prev || []) ++ curr
         @recomputeDimensions!
-        @recomputeXScale [absMin.x, absMax.x]
+        @recomputeXScale [absMin.x, absMax.x] if not @firstDrawn
         @recomputeYScale [0, absMax.y]
         @drawYAxis!
         @drawXAxis!
