@@ -71,7 +71,8 @@ window.ValueDrawer =
                                 ; #{indices.byty[it.byt_id]} #{indices.kraje[it.region_id]}"
                             | \fdbi70, \fdbi85, \fdbi100
                                 spolu = it.field.substr 4
-                                "#{Math.round it.y * 100}%
+                                spolu = 100 - parseInt spolu, 10
+                                "#{Math.round it.y * 100}% příjmů domácnosti
                                 ; #{indices.byty[it.byt_id]} #{indices.kraje[it.region_id]}, #{spolu}% spoluúčast"
                             | \pdb
                                 "#{it.y.toString!replace '.' ','} ročních příjmů domácnosti
