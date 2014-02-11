@@ -7,8 +7,11 @@ externalScripts =
     \http://service.ihned.cz/js/modernizr/v2.6.2.svg.min.js
     \http://service.ihned.cz/js/d3/v3.3.2.min.js
     \http://service.ihned.cz/js/topojson/v1.min.js
+    \http://service.ihned.cz/js/tooltip/v1.1.2.d3.min.js
 
-externalStyles = []
+externalStyles =
+    \http://service.ihned.cz/js/tooltip/v1.1.2.css
+    ...
 
 deferScripts = <[ base.js LineGraph.js ]>
 gzippable = <[ ]>

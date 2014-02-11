@@ -1,3 +1,4 @@
+new Tooltip!watchElements!
 d3.selectAll \.fallback .remove!
 (err, kraje) <~ d3.json "../data/kraje.topo.json"
 {features} = topojson.feature kraje, kraje.objects.kraje
@@ -35,6 +36,7 @@ czMaps[1] = new CZMap width: 220, parentSelector: \.bydleni
 czMaps.forEach (map, mapId) ->
     map
         ..draw features
+        ..paths.attr \data-tooltip (d, i) -> indices.kraje[topoToIndices[i]]
         ..paths.on \mousedown -> d3.event.preventDefault!
         ..paths.on \click (d, i) ->
             currentKraje[mapId] =
