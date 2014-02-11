@@ -67,20 +67,15 @@ window.ValueDrawer =
                     | otherwise
                         switch it.field
                             | \cena
-                                "#{ig.utils.formatPrice it.y} Kč (
-                                #{Math.round it.y / yReferencePoint.y * 100}%)
+                                "#{ig.utils.formatPrice it.y} Kč
                                 ; #{indices.byty[it.byt_id]} #{indices.kraje[it.region_id]}"
                             | \fdbi70, \fdbi85, \fdbi100
                                 spolu = it.field.substr 4
-                                "#{Math.round it.y * 100}% (
-                                #{Math.round it.y / yReferencePoint.y * 100}%)
+                                "#{Math.round it.y * 100}%
                                 ; #{indices.byty[it.byt_id]} #{indices.kraje[it.region_id]}, #{spolu}% spoluúčast"
                             | \pdb
-                                "#{it.y.toString!replace '.' ','} ročních platů (
-                                #{Math.round it.y / yReferencePoint.y * 100}%)
+                                "#{it.y.toString!replace '.' ','} ročních platů
                                 ; #{indices.byty[it.byt_id]} #{indices.kraje[it.region_id]}"
-
-                ..classed \reference -> it is yReferencePoint
                 ..each (d, i) -> bboxes[i] = @getBBox!
             ..select \rect
                 ..attr \x 1
