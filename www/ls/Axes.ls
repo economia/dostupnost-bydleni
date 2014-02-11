@@ -34,6 +34,6 @@ window.XAxis =
             ..attr \transform "translate(0, #{@height})"
             ..call xAxis
             ..selectAll "text"
-                # ..attr \x -7
+                ..attr \x (d, i) -> if i is 4 then -14 else 0
                 ..attr \dy 13
 
