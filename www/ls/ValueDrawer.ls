@@ -74,7 +74,7 @@ window.ValueDrawer =
                                 "#{Math.round it.y * 100}%
                                 ; #{indices.byty[it.byt_id]} #{indices.kraje[it.region_id]}, #{spolu}% spoluúčast"
                             | \pdb
-                                "#{it.y.toString!replace '.' ','} ročních platů
+                                "#{it.y.toString!replace '.' ','} ročních příjmů domácnosti
                                 ; #{indices.byty[it.byt_id]} #{indices.kraje[it.region_id]}"
                 ..each (d, i) -> bboxes[i] = @getBBox!
             ..select \rect
