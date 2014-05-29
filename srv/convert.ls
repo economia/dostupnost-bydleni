@@ -5,7 +5,7 @@ require! {
 out = "kraj_index,byt_index,datum,cena,pdb,fdbi70,fdbi85,fdbi100"
 kraje = []
 byty = []
-c = csv!.from.stream fs.createReadStream "#__dirname/../data/dostupnost_bydleni.csv"
+c = csv!.from.stream fs.createReadStream "#__dirname/../data/bydleni_duben14.csv"
     ..on \record ([kraj-druh-R-M,kraj,rok,mesic,byt,cena,fdbi70,fdbi85,fdbi100,pdb], index) ->
         return if pdb == 'pdb'
         unless kraj in kraje => kraje.push kraj
